@@ -18,7 +18,9 @@ app.use(express.static(__dirname + "/public"));
 seed();
 
 //db config
-mongoose.connect("mongodb://localhost/lookuppickup", {
+// mongodb://<dbuser>:<dbpassword>@ds159013.mlab.com:59013/lookuppickup
+// mongodb://localhost/lookuppickup
+mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds159013.mlab.com:59013/lookuppickup", {
     useMongoClient: true,
 });
 
