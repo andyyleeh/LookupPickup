@@ -1,0 +1,18 @@
+<% include partials/top %>
+
+<% courts.forEach(function(court){ %>
+    <div class="ui center aligned basic segment">
+        <h2><%=court.name%></h1>
+        <h4>Map</h4>
+        <div>
+             <%-court.map%>
+        </div>
+       
+
+        <a class="ui button" href="/courts/<%=court.id%>">See More</a> 
+        
+    </div>
+<hr>
+<% }); %>
+
+<% include partials/bot %>

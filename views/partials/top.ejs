@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LookUp PickUp</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet">
+        <link href="main.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container" id="topbar">
+            <div class="ui secondary pointing menu">
+              <a class="active item">
+                Browse
+              </a>
+              <a class="item">
+                Messages
+              </a>
+              <a class="item">
+                Friends
+              </a>
+              <div class="right menu">
+                <div class="item">
+                  <div class="ui transparent icon input">
+                    <input type="text" placeholder="Search...">
+                    <i class="search link icon"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="right menu">
+                <% if(!activeUser){ %>
+                  <a class="ui item" href="/login">
+                    Sign In
+                  </a>
+                  <a class="ui item" href="/signup">
+                    Sign up
+                  </a>
+                <% } else { %>
+                    <a class="ui item" href="/logout">
+                      Logout
+                    </a>
+                    <% } %>
+              </div>
+            </div>
+        </div>
+        

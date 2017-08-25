@@ -1,0 +1,41 @@
+<% include partials/top %>
+
+<h2><%=court.name%></h2>
+<div class="ui center aligned basic segment">
+    <div><%-court.map%></div>
+    <h4><%=court.location%></h4>
+</div>
+
+<h4 class="ui horizontal divider header">
+  <i class="comment outline icon"></i>
+  Comments
+</h4>
+<div class="ui comments" style="margin: 0 auto;">
+    <form class="ui reply form" action="/courts/<%=court.id%>/comments" method="POST">
+      <div class="field">
+        <textarea name="comment"></textarea>
+      </div>
+      <button class="ui blue labeled submit icon button">
+        <i class="icon edit"></i> Add Comment
+      </button>
+    </form>
+  <% court.comments.forEach(function(comment){ %>
+      <div class="comment">
+    <div class="content">
+      <a class="author"><%=comment.creator.username%></a>
+      <div class="metadata">
+        <span class="date"></span>
+      </div>
+      <div class="text">
+        <%=comment.text%>
+      </div>
+      <!--<div class="actions">-->
+      <!--  <a class="reply">Reply</a>-->
+      <!--</div>-->
+    </div>
+  </div>
+  <% }); %>
+  
+</div>
+
+<% include partials/bot %>

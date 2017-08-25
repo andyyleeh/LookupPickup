@@ -1,0 +1,47 @@
+body{
+    z-index: 0;
+    background-color: #000;
+    position: relative;
+}
+.ui.button{
+    position: relative;
+    z-index: 3;
+}
+
+h1.ui.header{
+    position: relative;
+    z-index: 2;
+    font-size: 4em;
+    text-align: center;
+    padding-top: 40vh;
+    margin: 0;
+}
+
+a.ui.right.floated.button{
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+#bg{
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    margin-top: 0;
+    margin-bottom: 0;
+    top: 0;
+    left: 0;
+    background-image: url("bg.jpg");
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: 0.75;
+    position: absolute;
+    animation: imageAnimation 5s linear;
+}
+
+@keyframes imageAnimation { 
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
+  }
+}
