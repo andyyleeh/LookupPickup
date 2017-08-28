@@ -1,0 +1,17 @@
+<% include partials/top %>
+
+<form class="ui form" action="/courts/new" method="POST">
+    <div class="field">
+        <label>Name</label>
+        <input type="text" name="court[name]" placeholder="name">
+    </div>
+    <div class="field">
+        <label>Location Map</label>
+        <input type="text" name="court[map]" placeholder="Google embed for map">
+    </div>
+    <div class="field">
+        <input type="submit">
+    </div>
+</form>
+
+<% include partials/bot %>

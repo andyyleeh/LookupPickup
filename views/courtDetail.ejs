@@ -1,5 +1,10 @@
 <% include partials/top %>
 
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
 <h2><%=court.name%></h2>
 <div class="ui center aligned basic segment">
     <div><%-court.map%></div>
@@ -29,6 +34,21 @@
       <div class="text">
         <%=comment.text%>
       </div>
+      <% if(activeUser && comment.creator.id.equals(activeUser.id)){ %>
+        <div class="actions">
+          <a id="delete">Delete</a>
+        </div>
+        <% } %>
+        
+        <script>
+          $(document).ready(function(){
+            $(".delete").click(function(){
+              if (!confirm("Do you want to delete")){
+                return false;
+              }
+            });
+          });
+        </script>
       <!--<div class="actions">-->
       <!--  <a class="reply">Reply</a>-->
       <!--</div>-->

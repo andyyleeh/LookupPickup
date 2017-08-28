@@ -22,15 +22,15 @@ function seedDB(){
         }
         console.log("emptied courts");
          //add a few campgrounds
-        data.forEach(function(seed){
-            courts.create(seed, function(err, campground){
-                if(err){
-                    console.log(err)
-                } else {
-                    console.log("created court");
-                }
-            });
-        });
+        // data.forEach(function(seed){
+        //     courts.create(seed, function(err, campground){
+        //         if(err){
+        //             console.log(err)
+        //         } else {
+        //             console.log("created court");
+        //         }
+        //     });
+        // });
     }); 
 }
 

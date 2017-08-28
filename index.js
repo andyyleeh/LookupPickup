@@ -1,6 +1,7 @@
 var express = require("express"),
     mongoose = require("mongoose"),
     app = express(),
+    methodOverride = require("method-override"),
     bodyParser  = require("body-parser"),
     LocalStrategy = require("passport-local"),
     passport    = require("passport"),
@@ -14,13 +15,14 @@ var express = require("express"),
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 //seed
-seed();
+// seed(); 
 
 //db config
 // mongodb://<dbuser>:<dbpassword>@ds159013.mlab.com:59013/lookuppickup
 // mongodb://localhost/lookuppickup
-mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds159013.mlab.com:59013/lookuppickup", {
+mongoose.connect("mongodb://ball:islife@ds159013.mlab.com:59013/lookuppickup", {
     useMongoClient: true,
 });
 
@@ -54,6 +56,21 @@ app.get("/courts", function(req, res){
             res.redirect("back");
         } else{
             res.render("courts", {courts: allCourts});
+        }
+    });
+})
+
+app.get("/courts/new", function(req, res){
+    res.render("courtNew");
+})
+
+app.post("/courts/new", function(req, res){
+    courts.create(req.body.court , function(err, newCourt){
+        if(err){
+            res.redirect("back");
+        } else{
+            console.log(newCourt);
+            res.redirect("/courts");
         }
     });
 })
@@ -130,6 +147,20 @@ app.post("/courts/:id/comments", midObj.isLogged ,function(req, res){
     });
 });
 
+app.delete("/courts/:id/comments/:comment_id", function(req, res){
+    comments.findByIdAndRemove(req.params.comment_id, function(err){
+        if(err){
+            res.redirect("back");
+        } else{
+            res.redirect("/courts/" + req.params.id);
+        }
+    })
+})
+
+//profile
+app.get("/profile/:username", function(req, res){
+    res.render("profile");
+})
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("server up");
