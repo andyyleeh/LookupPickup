@@ -20,9 +20,9 @@ app.use(methodOverride("_method"));
 // seed(); 
 
 //db config
-// mongodb://<dbuser>:<dbpassword>@ds159013.mlab.com:59013/lookuppickup
+// mongodb://ball:islife@ds159013.mlab.com:59013/lookuppickup
 // mongodb://localhost/lookuppickup
-mongoose.connect("mongodb://ball:islife@ds159013.mlab.com:59013/lookuppickup", {
+mongoose.connect("mongodb://localhost/lookuppickup", {
     useMongoClient: true,
 });
 

@@ -1,21 +1,18 @@
 <% include partials/top %>
 
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-
 <h2><%=court.name%></h2>
 <div class="ui center aligned basic segment">
     <div><%-court.map%></div>
     <h4><%=court.location%></h4>
+    <h4><%=court.details %></h4>
 </div>
 
 <h4 class="ui horizontal divider header">
   <i class="comment outline icon"></i>
   Comments
 </h4>
-<div class="ui comments" style="margin: 0 auto;">
+
+<div class="ui comments" id="commentArea">
     <form class="ui reply form" action="/courts/<%=court.id%>/comments" method="POST">
       <div class="field">
         <textarea name="comment"></textarea>
@@ -35,27 +32,38 @@
         <%=comment.text%>
       </div>
       <% if(activeUser && comment.creator.id.equals(activeUser.id)){ %>
-        <div class="actions">
-          <a id="delete">Delete</a>
+        <div  class="actions">
+          <a id="pop">Delete</a>
         </div>
         <% } %>
-        
-        <script>
-          $(document).ready(function(){
-            $(".delete").click(function(){
-              if (!confirm("Do you want to delete")){
-                return false;
-              }
-            });
-          });
-        </script>
       <!--<div class="actions">-->
       <!--  <a class="reply">Reply</a>-->
       <!--</div>-->
     </div>
   </div>
+  <div class="see" id="confirm">
+    <p>Are you sure you want to delete this comment?</p>
+    <form action="/courts/<%=court.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
+      <button class="ui button">Yes</button>
+    </form>
+    <a id="nope" class="ui button">No</a>
+  </div>
   <% }); %>
   
 </div>
+
+<div class="see" id="shade"></div>
+
+<script>
+    $("#pop").click(function(){
+     $("#shade").toggleClass("see");
+     $("#confirm").toggleClass("see");
+    });
+    $("#nope").click(function(){
+     $("#shade").toggleClass("see");
+     $("#confirm").toggleClass("see");
+    });
+  </script>
+
 
 <% include partials/bot %>

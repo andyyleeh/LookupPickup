@@ -1,9 +1,49 @@
-.ui.comments{
-    margin-top: 40px;
+#commentArea{
+    margin: 0 auto;
 }
+
+.ui.comments{
+    margin:0 auto;
+}
+
 
 #add{
     position: fixed;
     bottom: 10px;
     left : 10px;
+}
+
+#shade{
+   position: fixed;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   opacity: 0.5;
+   z-index: 2;
+   background: black;
+   margin: 0 ;
+}
+
+#confirm{
+   position: fixed;
+   z-index: 3;
+   top:40%;
+   width: 200px;
+   height: 150px;
+   margin: 0 auto;
+   color: white;
+}
+
+.see{
+   display: none;
+   color: red;
+}
+
+body{
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   position: relative;
 }
