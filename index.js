@@ -147,6 +147,16 @@ app.post("/courts/:id/comments", midObj.isLogged ,function(req, res){
     });
 });
 
+app.put("/courts/:id/comments/:comment_id", function(req, res){
+    comments.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err){
+        if(err){
+            res.redirect("back");
+        }else{
+            res.redirect("/courts/" + req.params.id);
+        }
+    })
+})
+
 app.delete("/courts/:id/comments/:comment_id", function(req, res){
     comments.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){

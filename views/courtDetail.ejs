@@ -36,9 +36,9 @@
           <a id="pop">Delete</a>
         </div>
         <% } %>
-      <!--<div class="actions">-->
-      <!--  <a class="reply">Reply</a>-->
-      <!--</div>-->
+      <div class="actions">
+        <a id="popE">Edit</a>
+      </div>
     </div>
   </div>
   <div class="see" id="confirm">
@@ -47,6 +47,14 @@
       <button class="ui button">Yes</button>
     </form>
     <a id="nope" class="ui button">No</a>
+  </div>
+  
+  <div class="see" id="edit">
+    <form action="/courts/<%=court.id%>/comments/<%=comment.id%>?_method=PUT" method="POST">
+      <input type="text" name="comment[text]" placeholder="<%=comment.text%>">
+      <button class="ui button">Edit</button>
+    </form>
+    <a id="nopeE" class="ui button">Cancel</a>
   </div>
   <% }); %>
   
@@ -60,6 +68,15 @@
      $("#confirm").toggleClass("see");
     });
     $("#nope").click(function(){
+     $("#shade").toggleClass("see");
+     $("#confirm").toggleClass("see");
+    });
+    
+    $("#popE").click(function(){
+     $("#shade").toggleClass("see");
+     $("#edit").toggleClass("see");
+    });
+    $("#nopeE").click(function(){
      $("#shade").toggleClass("see");
      $("#confirm").toggleClass("see");
     });

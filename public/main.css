@@ -25,7 +25,7 @@
    margin: 0 ;
 }
 
-#confirm{
+#confirm, #edit{
    position: fixed;
    z-index: 3;
    top:40%;
@@ -46,4 +46,9 @@ body{
    margin: 0;
    padding: 0;
    position: relative;
+}
+
+.actions{
+    display: inline;
+    margin-right: 2px;
 }
