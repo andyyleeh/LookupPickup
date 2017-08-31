@@ -168,8 +168,18 @@ app.delete("/courts/:id/comments/:comment_id", function(req, res){
 })
 
 //profile
-app.get("/profile/:username", function(req, res){
-    res.render("profile");
+app.get("/profile/:username/:id", function(req, res){
+    user.findById(req.params.id, function(err, user){
+        if(err){
+            res.redirect("back");
+        }else{
+            res.render("profile", {user, user});
+        }
+    })
+})
+
+app.get("/profile/:username/edit", function(req, res){
+    res.render("profileEdit");
 })
 
 app.listen(process.env.PORT, process.env.IP, function(){

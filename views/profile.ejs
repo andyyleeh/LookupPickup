@@ -1,8 +1,13 @@
 <% include partials/top %>
-<h1><%=activeUser.username%></h1>
+<h1><%=user.username%></h1>
 
-<h4>Skill Level</h4>
-<a class="ui button">Message <%=activeUser.username %></a>
+<h4>Bio</h4>
+<% if(!user.description){ %>
+    <p>User has not provided a bio</p>
+<% } else { %>
+    <p><%=user.description%></p>
+<% } %>
+<a class="ui button">Message <%=user.username %></a>
 
 
 
