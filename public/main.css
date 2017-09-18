@@ -29,10 +29,26 @@
    position: fixed;
    z-index: 3;
    top:40%;
-   width: 200px;
-   height: 150px;
+   left: 50%;
+   transform: translate(-50%, 0);
+   background-color: white;
    margin: 0 auto;
-   color: white;
+   text-align: center
+}
+
+#edit textarea{
+    border: 1px solid #999999;
+    font-size: 1.25em;
+    display: block;
+    width: 60%;
+    margin: 30px auto;
+}
+#edit h4{
+    color:black;
+}
+
+#edit a{
+    display: in-line;
 }
 
 .see{
