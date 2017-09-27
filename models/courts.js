@@ -4,6 +4,7 @@ var courtsSchema = new mongoose.Schema({
     name: String,
     map: String,
     details: String,
+    ratings: [Number],
     comments: [
       {
          type: mongoose.Schema.Types.ObjectId,

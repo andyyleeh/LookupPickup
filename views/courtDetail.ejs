@@ -5,7 +5,14 @@
     <div><%-court.map%></div>
     <h4><%=court.location%></h4>
     <h4><%=court.details %></h4>
+    <p>Rating: <span id="rating"></span></p>
 </div>
+
+<% var rate; %>
+<%for(var i = 0; i < court.ratings.length; i++){ %>
+  <% rate += court.ratings[i]; %>
+<% } %>
+<% $("#rating").text(rate); %>
 
 <h4 class="ui horizontal divider header">
   <i class="comment outline icon"></i>
