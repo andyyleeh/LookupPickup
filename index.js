@@ -1,6 +1,9 @@
 var express = require("express"),
     mongoose = require("mongoose"),
+    mongodb = require("mongodb"),
+    mongoClient = mongodb.MongoClient,
     app = express(),
+    assert = require('assert'),
     methodOverride = require("method-override"),
     bodyParser  = require("body-parser"),
     LocalStrategy = require("passport-local"),
@@ -21,10 +24,12 @@ app.use(methodOverride("_method"));
 
 //db config
 // mongodb://ball:islife@ds159013.mlab.com:59013/lookuppickup
-// mongodb://localhost/lookuppickup
-mongoose.connect("mongodb://ball:islife@ds159013.mlab.com:59013/lookuppickup", {
-    useMongoClient: true,
+var MONGOHQ_URL =  "mongodb://localhost/lookuppickup"
+mongoose.connect("mongodb://localhost/lookuppickup", {
+  useMongoClient: true,
 });
+
+
 
 // config passport
 app.use(require("express-session")({
@@ -44,12 +49,12 @@ app.use(function(req, res, next){
    next();
 });
 
-//homepage
+//homepage--------------------------------
 app.get("/", function(req, res){
     res.render("homepage");
 })
 
-//courts
+//courts----------------------------------
 app.get("/courts", function(req, res){
     courts.find({}, function(err, allCourts){
         if(err){
@@ -85,7 +90,7 @@ app.get("/courts/:id", function(req, res){
     });
 })
 
-//registration and login
+//registration and login-------------------------------------
 app.get("/login", function(req, res){
     res.render("login");
 })
@@ -118,7 +123,7 @@ app.get("/logout", function(req, res){
     res.redirect("/courts");
 });
 
-//comments
+//comments-----------------------------------------------
 app.post("/courts/:id/comments", midObj.isLogged ,function(req, res){
     courts.findById(req.params.id, function(err, court){
         if(err){
@@ -167,7 +172,7 @@ app.delete("/courts/:id/comments/:comment_id", function(req, res){
     })
 })
 
-//profile
+//profile---------------------------------------------------------
 app.get("/profile/:username/:id", function(req, res){
     user.findById(req.params.id, function(err, user){
         if(err){
@@ -181,6 +186,48 @@ app.get("/profile/:username/:id", function(req, res){
 app.get("/profile/:username/edit", function(req, res){
     res.render("profileEdit");
 })
+
+//search ---------------------------------------------------------
+app.get("/search", function(req, res){
+    db.collection('textstore').find({
+    "$text": {
+      "$search": req.body.query
+        }
+      },{
+      name: 1,
+      
+      textScore: {
+        $meta: "textScore"
+      }
+    },{
+    sort: {
+      textScore: {
+$meta: "textScore"
+      }
+    }
+  }).toArray(function(err, courts) {
+    res.render("search", {courts: courts});
+  })
+});
+
+
+var db;
+mongoClient.connect(MONGOHQ_URL, function(err, database) {  
+  db = database;
+  db.collection("courts", { }, function(err, coll) {
+      if (err != null) {
+      db.createCollection("textstore", function(err, result) {
+        assert.equal(null, err);  
+      });
+    }
+    db.ensureIndex("courts", {  
+      name: "text"
+    }, function(err, indexname) {
+      assert.equal(null, err);
+    });
+    app.listen(3000);
+      });
+});
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("server up");
